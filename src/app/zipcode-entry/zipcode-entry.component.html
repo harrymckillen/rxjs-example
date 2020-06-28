@@ -1,0 +1,5 @@
+<label for="zipcode">Enter a zipcode:</label>
+<br>
+<input type="text" #zipcode placeholder="Zipcode (e.g. 10001)" class="">
+<br>
+<button (click)="addLocation(zipcode.value)">Add Location</button>
