@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { fromEvent } from 'rxjs';
+import { fromEvent, of, interval, Observable} from 'rxjs';
+import { map, filter, debounceTime, take, takeLast } from 'rxjs/operators'
 
 
 @Component({
@@ -8,6 +9,8 @@ import { fromEvent } from 'rxjs';
   styleUrls: ['./observable-test.component.scss']
 })
 export class ObservableTestComponent implements OnInit {
+
+  time: any;
 
   constructor() { }
 
@@ -88,7 +91,7 @@ export class ObservableTestComponent implements OnInit {
     const flatMapArr = gameData.flatMap(game => {
       return game.bosses;
     });
-    console.log(flatMapArr);
+    console.log(flatMapArr); // TODO: Blah
 
     console.log('==============')
     console.log(trilogiesArr);
@@ -149,6 +152,39 @@ export class ObservableTestComponent implements OnInit {
     });
     // subscription.unsubscribe();
     // subscription2.unsubscribe();
+
+    console.log('=====of example=========')
+    const datasource = of(1,2,3,4,5,6,7,8,9,10);
+
+    const dssubscribe = datasource
+      .pipe(
+        // debounceTime(200),
+        map(v => v+1),
+        filter(v => v >=4),
+        takeLast(5)
+      )
+      .subscribe(v => console.log(v));
+
+
+    const clicks = fromEvent(document, 'click');
+    // const positions = clicks.pipe(map(ev => ev.clientX));
+    // positions.subscribe(x => console.log(x));
+
+    const source = of({ name: 'Brian' }, [1, 2, 3], function hello() {
+      return 'Hello';
+    });
+    const subscribe = source.subscribe(val => console.log(val));
+    //output: {name: 'Brian'}, [1,2,3], function hello() { return 'Hello' }
+
+    // Create an Observable that will publish a value on an interval
+    const secondsCounter = interval(1000);
+    // Subscribe to begin publishing values
+    // secondsCounter.subscribe(n => console.log(`It's been ${n} seconds since subscribing!`));
+
+    this.time = new Observable<string>(observer => {
+    setInterval(() => observer.next(new Date().toString()), 1000);
+    });
+    /////////////////////////////////////////
   }
 
 }

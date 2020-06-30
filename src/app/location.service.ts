@@ -11,14 +11,14 @@ export class LocationService {
 
   addLocation(zipcode: string) {
     this.locations.push(zipcode);
-    this.weatherService.addCurrentConditions(zipcode);
+    // this.weatherService.addCurrentConditions(zipcode);
   }
 
   removeLocation(zipcode: string) {
     let index = this.locations.indexOf(zipcode);
     if (index !== -1) {
       this.locations.splice(index, 1);
-      this.weatherService.removeCurrentConditions(zipcode);
+      // this.weatherService.removeCurrentConditions(zipcode);
     }
   }
 

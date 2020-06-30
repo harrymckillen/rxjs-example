@@ -124,5 +124,8 @@
         }
       }
     }},
-  "defaultProject": "reactiveapp"
+  "defaultProject": "reactiveapp",
+  "cli": {
+    "defaultCollection": "@ngrx/schematics"
+  }
 }
