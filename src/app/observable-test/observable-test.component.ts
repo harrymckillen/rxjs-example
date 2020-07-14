@@ -166,7 +166,7 @@ export class ObservableTestComponent implements OnInit {
       .subscribe(v => console.log(v));
 
 
-    const clicks = fromEvent(document, 'click');
+    // const clicks = fromEvent(document, 'click');
     // const positions = clicks.pipe(map(ev => ev.clientX));
     // positions.subscribe(x => console.log(x));
 
@@ -181,9 +181,17 @@ export class ObservableTestComponent implements OnInit {
     // Subscribe to begin publishing values
     // secondsCounter.subscribe(n => console.log(`It's been ${n} seconds since subscribing!`));
 
+
     this.time = new Observable<string>(observer => {
     setInterval(() => observer.next(new Date().toString()), 1000);
     });
+    const startButton = document.getElementById('startButton');
+    const stopButton = document.getElementById('stopButton');
+
+    const stopButton$ = fromEvent(stopButton, 'click');
+    const killTime = stopButton$.subscribe(
+      event => this.time.unsubscribe()
+    )
     /////////////////////////////////////////
   }
 

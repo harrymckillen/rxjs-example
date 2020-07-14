@@ -2,4 +2,4 @@
 <br>
 <input type="text" #zipcode placeholder="Zipcode (e.g. 10001)" class="">
 <br>
-<button (click)="addLocation(zipcode.value)">Add Location</button>
+<button (click)="zipAdded.emit(zipcode.value)">Add Location</button>

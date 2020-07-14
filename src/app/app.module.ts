@@ -4,7 +4,7 @@ import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { EffectsModule } from '@ngrx/effects';
 import { HttpClientModule } from '@angular/common/http';
-
+import { StoreRouterConnectingModule } from '@ngrx/router-store'
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -17,6 +17,7 @@ import { MainPageComponent } from './main-page/main-page.component';
 import { ObservableTestComponent } from './observable-test/observable-test.component';
 import { WeatherService } from './weather.service';
 import { CurrentConditionsEffects } from './effects/current-conditions.effects';
+import { ForecastEffects } from './effects/forecast.effects';
 
 @NgModule({
   declarations: [
@@ -42,7 +43,8 @@ import { CurrentConditionsEffects } from './effects/current-conditions.effects';
       maxAge: 25, // Retains last 25 states
       // logOnly: environment.production, // Restrict extension to log-only mode
     }),
-    EffectsModule.forRoot([CurrentConditionsEffects]),
+    EffectsModule.forRoot([CurrentConditionsEffects, ForecastEffects]),
+    StoreRouterConnectingModule.forRoot( { stateKey: 'router'}),
     !environment.production ? StoreDevtoolsModule.instrument() : [],
   ],
   providers: [WeatherService],

@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { AddZipCode } from '../actions/zip-code.actions';
+import { State } from '../reducers';
+import { Store } from '@ngrx/store';
 
 @Component({
   selector: 'app-main-page',
@@ -7,7 +10,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MainPageComponent implements OnInit {
 
-  constructor() { }
+  constructor(private store: Store<State>) { }
+
+  addLocation (zipcode: string){
+    this.store.dispatch(new AddZipCode(zipcode));
+  }
 
   ngOnInit(): void {
   }

@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { State } from '../reducers';
+import { State, selectZipcodeList } from '../reducers';
 import { WeatherService } from '../weather.service';
+import { RemoveZipCode } from '../actions/zip-code.actions';
 
 @Component({
   selector: 'app-current-conditions',
@@ -18,8 +19,8 @@ export class CurrentConditionsComponent {
     public weatherService: WeatherService
   ) {
     store
-      .select((state) => state.zipcodes)
-      .subscribe((zips) => (this.zipcodes = zips.zipcodes));
+      .select(selectZipcodeList)
+      .subscribe(zips => this.zipcodes = zips);
 
     store
       .select((state) => state.currentConditions)
@@ -32,11 +33,8 @@ export class CurrentConditionsComponent {
     return this.currentConditions.get(zip);
   }
 
-  showForecast(zip){
-    console.log(`Show Forecast Function ${zip}`);
-  }
-
-  removeZip(zip) {
+  removeZip(zip: string) {
     console.log(`Remove Zip Function ${zip}`);
+    this.store.dispatch(new RemoveZipCode(zip));
   }
 }

@@ -4,10 +4,7 @@ import { Observable, of } from 'rxjs';
 import { mergeMap, catchError, map } from 'rxjs/operators';
 import { AddZipCode, ZipCodeActionTypes } from '../actions/zip-code.actions';
 import { WeatherService } from '../weather.service';
-import {
-  CurrentConditionsLoaded,
-  CurrentConditionsLoadFailed,
-} from '../actions/current-conditions.actions';
+import { CurrentConditionsLoaded, CurrentConditionsLoadFailed } from '../actions/current-conditions.actions';
 
 @Injectable()
 export class CurrentConditionsEffects {

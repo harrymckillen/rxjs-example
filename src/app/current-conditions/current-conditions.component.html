@@ -1,5 +1,5 @@
 <div>
-  <div *ngFor="let zip of zipcodes" class="well flex" (click)="showForecast(zip)">
+  <div *ngFor="let zip of zipcodes" class="well flex">
     <div>
       <h3>{{getConditions(zip)?.name}} ({{zip}})</h3>
       <h4>Current conditions: {{getConditions(zip)?.weather[0].main}}</h4>
@@ -14,7 +14,7 @@
       </p>
     </div>
     <div>
-      <span class="close" (click)="removeZip(zip)">&times;</span>
+      <a [routerLink]="" routerLinkActive="router-link-active"  class="close" (click)="removeZip(zip)">&times;</a>
       <img [src]="weatherService.getWeatherIcon(getConditions(zip)?.weather[0].id)">
     </div>
   </div>

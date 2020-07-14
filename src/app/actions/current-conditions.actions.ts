@@ -2,7 +2,7 @@ import { Action } from '@ngrx/store';
 
 export enum CurrentConditionsActionTypes {
   CurrentConditionsLoaded = '[CurrentConditions] CurrentConditions Loaded',
-  CurrentConditionsLoadFailed = '[CurrentConditions] CurrentConditions Load Failded',
+  CurrentConditionsLoadFailed = '[CurrentConditions] CurrentConditions Load Failed',
 }
 
 export class CurrentConditionsLoaded implements Action {

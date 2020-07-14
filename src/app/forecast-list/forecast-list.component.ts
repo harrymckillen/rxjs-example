@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { WeatherService } from '../weather.service';
 import { ActivatedRoute } from '@angular/router';
+import { Store } from '@ngrx/store';
+import { selectForecast, State } from '../reducers'
 
 @Component({
   selector: 'app-forecast-list',
@@ -8,18 +10,13 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./forecast-list.component.scss'],
 })
 export class ForecastListComponent {
-  zipcode: string;
   forecast: any;
 
   constructor(
+    private store: Store<State>,
     public weatherService: WeatherService,
-    route: ActivatedRoute
     ) {
-    route.params.subscribe((params) => {
-      this.zipcode = params['zipcode'];
-      weatherService
-        .getForecast(this.zipcode)
-        .subscribe((data) => (this.forecast = data));
-    });
-  }
+      store.select(selectForecast).subscribe((fcast) => this.forecast = fcast);
+  };
 }
+
